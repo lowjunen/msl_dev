@@ -72,6 +72,6 @@
 		<description>Send Mission command to control a camera or a antenna mount.</description>
 	</class>
 	<class name="trajectory_nominal" type="mavros::extra_plugins::TrajectoryNominalPlugin" base_class_type="mavros::plugin::PluginBase">
-    	<description>Accepts keyboard command.</description>
+    	<description>Nominal trajectory data.</description>
 	</class>
 </library>
