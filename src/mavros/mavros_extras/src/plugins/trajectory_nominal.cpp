@@ -8,7 +8,7 @@ namespace extra_plugins{
 class TrajectoryNominalPlugin : public plugin::PluginBase {
 public:
     TrajectoryNominalPlugin() : PluginBase(),
-        nh("~")
+        nh("~trajectory_nominal")
     { }
     
     void initialize(UAS &uas_) override

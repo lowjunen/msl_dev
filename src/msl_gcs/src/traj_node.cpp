@@ -6,7 +6,7 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "traj_node");
     ros::NodeHandle nh;
 
-    ros::Publisher traj_pub = nh.advertise<mavros_msgs::TrajectoryNominal>("mavros/trajectory_nominal_sub",1000);
+    ros::Publisher traj_pub = nh.advertise<mavros_msgs::TrajectoryNominal>("mavros/trajectory_nominal/trajectory_nominal_sub",1000);
 
     ros::Rate rate(20.0);
 
