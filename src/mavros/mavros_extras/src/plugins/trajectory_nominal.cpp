@@ -14,6 +14,7 @@ public:
     void initialize(UAS &uas_) override
     {
         PluginBase::initialize(uas_);
+        trajectory_nominal_sub = nh.subscribe("trajectory_nominal_sub",10,&TrajectoryNominalPlugin::trajectory_nominal_cb,this);
     }
 
     Subscriptions get_subscriptions()
@@ -23,6 +24,7 @@ public:
     
 private:
     ros::NodeHandle nh;
+    ros::Subscriber trajectory_nominal_sub;
 
     void trajectory_nominal_cb(const mavros_msgs::TrajectoryNominal::ConstPtr &req) {
         mavlink::common::msg::TRAJECTORY_NOMINAL traj{};
