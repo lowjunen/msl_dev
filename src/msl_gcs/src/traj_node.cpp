@@ -10,8 +10,6 @@ int main(int argc, char **argv)
 
     ros::Rate loop_rate(100);
     
-    MatrixXd test = readMatrix("f_out_hover.csv");
-
     int count = 0;
     while(ros::ok()){
         mavros_msgs::TrajectoryNominal msg;
