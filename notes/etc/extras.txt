@@ -1,7 +1,0 @@
-set +e
-mc_rate_control stop
-set -e
-
-set +e
-mc_dir_control start
-set -e
