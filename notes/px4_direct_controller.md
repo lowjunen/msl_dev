@@ -93,5 +93,6 @@ traj message form. I am able to reliably publish a message comprising of a times
 
 Notes
 -----
-Since mc_dir_control is currently 'developmental', I didn't bother with writing up a custom boot sequence for it in the Firmware repo. It instead piggybacks the default multicopter boot. I use a script in the sdcard to stop mc_rate_control and start mc_dir_control in its place.
+Since mc_dir_control is currently 'developmental', I didn't bother with writing up a custom boot sequence for it in the Firmware repo. It instead piggybacks the default multicopter boot. I use a script in the sdcard to stop mc_rate_control and start mc_dir_control in its place. The sdcard file is stored in this folder for reference.
+
 
