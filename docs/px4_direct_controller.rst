@@ -82,18 +82,16 @@ Ok enough with my rambling on what I hope to reach in the long horizon. Here's w
 
 1) [DONE] Swap out the pos->att->rate controllers in firmware with the low level controller on mc builds. For now, I subscribe to an existing
 uORB topic (rc_channels) just to test. 
-2) [Kinda done] Custom boot to clean up unnecessary apps. I currently do this using a separate make file: px4_fmu_v4_direct (i think that's the name?)
+2) [Kinda Done] Custom boot to clean up unnecessary apps. I currently do this using a separate make file: px4_fmu_v4_direct (i think that's the name?)
 and then I use a file in the sd card to stop mc_rate_controller. I'll work on a proper config later on.
-3) [doing now]. Define a custom uORB topic to be published from a companion computer. For now... I'll just use the diff. flat spline as my default
-traj message form. It's smaller than the iLQR packet (i think?) and it'll let me figure out what kind of bandwidth/latency constraints we will have.
-We might need to use the FastRTPS bridge if this turns out to be a real bottleneck. PepMS over in the px4 slack has some solutions to this. Will look there
-when we get there. But for now, we'll just stream the polynomial out. Or if that's too slow, we can load it in prior to a flight. My guess is we can
-get away with that if trajectories are short.
+3) [DONE] Define a custom uORB topic to be published from a companion computer. For now, I am using the diff. flat spline as my default
+traj message form. I am able to reliably publish a message comprising of a timestamp and a float[20] array (corresponding to a single flat output frame) at 100Hz from a companion computer over to the PX4. Current implementation uses the standard mavlink protocol. Will eventually switch to FastRTPS (TBD).
+4) [Doing Now] Write out an interchangable piece of mc_dir_control for different flavours of low level control. For now, it'll be the option of either diff. flat OR an empty LQR. The latter is to test interchangability. 
+5) [Doing Now] Attempt to overload the trajectory_nominal to be able to transmit multiple high-level control formats. This is because LQR will require different high-level data.
+6) [TO DO] Test sequence for verifying hover along with the necessary parameter estimation (to generalize across different platforms).
 
-Ah yes... so testing trajectories. FOR NOW... the only trajectories I will care about is a takeoff->hover->land and a takeoff->hover->line->land. There's
-a whole can of worms to uncover in terms of parameter estimation and vibration dampening effects. I'll worry about that later. Test platform...
-to give us the best shot... is a pixracer+upboard combo. This lets us run full ubuntu 18 onboard in a compact package. I won't try streaming the traj
-packet over wifi just yet. Gonna use a wired connection to give it the best chance.
 
-4) tidy up mc_direct_control and the custom uORB message so that it can be easily changed between diff. flat approach and iLQR approach. this should be 
-a good test of generality. I worry though as traj is really going to be very different. Can it really be generalized that way? Not sure. 
+Notes
+-----
+Since mc_dir_control is currently 'developmental', I didn't bother with writing up a custom boot sequence for it in the Firmware repo. It instead piggybacks the default multicopter boot. I use a script in the sdcard to stop mc_rate_control and start mc_dir_control in its place.
+
