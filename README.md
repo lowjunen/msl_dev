@@ -10,7 +10,7 @@ repositories:
 
 **ROS Workspace:** (This repository) We handle the high level trajectory planning here.
 
-**Firmware:** (https://github.com/lowjunen/Firmware/tree/direct_motor) We handle the low level trajectory planning here.
+**Firmware:** (https://github.com/lowjunen/Firmware/tree/direct_control) We handle the low level trajectory planning here.
 
 To be precise, we actually need 3 considering we have a custom mavlink message. But the customised mavlink repo is already submoduled into the customised Firmware repo). 
 
